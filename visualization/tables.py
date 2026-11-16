@@ -1,4 +1,4 @@
-""" Byg Plotly table """
+"""Plotly-tabeller til logdata, top-10 og fejlandel pr. port."""
 
 import plotly.graph_objects as go
 
@@ -7,6 +7,7 @@ from config import COLUMN_WIDTHS
 ELLIPSIS = "…"
 MSG_LIMIT = 40
 NEUTRAL_CELL_COLOR = "#ffffff"
+HEADER_FILL = "#e0e0e0"
 NO_RESULTS_MESSAGE = "Ingen resultater matcher filtrene"
 
 ROW_HEIGHT = 30
@@ -82,7 +83,7 @@ def build_table(records, columns=DEFAULT_COLUMNS):
                 header={
                     "values": [COLUMN_LABELS[column] for column in columns],
                     "align": "left",
-                    "fill": {"color": "#e0e0e0"},
+                    "fill": {"color": HEADER_FILL},
                 },
                 cells={
                     "values": cells,
@@ -96,6 +97,36 @@ def build_table(records, columns=DEFAULT_COLUMNS):
     height += MARGIN["t"] + MARGIN["b"]
     figure.update_layout(margin=MARGIN, height=height)
     return figure
+
+
+def build_columns_table(headers, columns):
+    figure = go.Figure(
+        data=[
+            go.Table(
+                header={
+                    "values": list(headers),
+                    "align": "left",
+                    "fill": {"color": HEADER_FILL},
+                },
+                cells={"values": columns, "align": "left"},
+            )
+        ]
+    )
+    rows = max((len(column) for column in columns), default=0)
+    height = HEADER_HEIGHT + ROW_HEIGHT * max(rows, 1)
+    height += MARGIN["t"] + MARGIN["b"]
+    figure.update_layout(margin=MARGIN, height=height)
+    return figure
+
+
+def build_top_n_table(entries, value_label, count_label="Hændelser"):
+    return build_columns_table(
+        (value_label, count_label),
+        (
+            [value for value, _ in entries],
+            [count for _, count in entries],
+        ),
+    )
 
 
 def build_empty_table(columns=DEFAULT_COLUMNS):

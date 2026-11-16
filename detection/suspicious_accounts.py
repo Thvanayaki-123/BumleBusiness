@@ -1,3 +1,5 @@
+"""Regelbaseret detektion af mistænkelige konti."""
+
 from collections import Counter, defaultdict
 from collections.abc import Iterable, Mapping
 

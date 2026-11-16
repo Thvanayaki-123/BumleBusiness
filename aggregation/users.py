@@ -1,3 +1,6 @@
+"""Find brugeren med flest loginforsøg."""
+
+
 def getHighestUser(UnholyList):
     users = [record for record in UnholyList if "User" in record]
     if not users:

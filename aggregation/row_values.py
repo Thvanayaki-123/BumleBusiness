@@ -1,3 +1,6 @@
+"""Udtræk af værdier fra de grupperede rækker."""
+
+
 def convert_from_Complied_Data(UnholyList,Keys):
     #Speedrunning a filtering system
     SearchList = []

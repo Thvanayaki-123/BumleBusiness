@@ -1,3 +1,5 @@
+"""Unikke brugere og kilde-IP'er pr. bruger."""
+
 from collections import defaultdict
 from collections.abc import Iterable
 from typing import TypedDict

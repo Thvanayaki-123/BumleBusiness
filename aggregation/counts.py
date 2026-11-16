@@ -1,3 +1,5 @@
+"""Optælling af hændelser pr. level, event, status og bruger."""
+
 
 def filtering(records):
     #Alle disse bruges til forskellige former for record keeping
@@ -53,8 +55,8 @@ def filtering(records):
     everyDict.append(LevelDict) 
     everyDict.append(EventDict)
     everyDict.append(StatusDict)
-    LoginSucces = EventDict.get("LOGIN_SUCCESS")
-    LoginFail = EventDict.get("LOGIN_FAILED")
+    LoginSucces = EventDict.get("LOGIN_SUCCESS", 0)
+    LoginFail = EventDict.get("LOGIN_FAILED", 0)
     LoginTotal = LoginSucces + LoginFail
-    LoginProcent = LoginFail/LoginTotal
+    LoginProcent = LoginFail/LoginTotal if LoginTotal else 0.0
     return everyDict, LoginProcent
