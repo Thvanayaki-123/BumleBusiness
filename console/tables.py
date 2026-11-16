@@ -1,3 +1,6 @@
+"""Udskrivning af grupperede rækker som konsolttabel."""
+
+
 def Sort_And_Table(Compiled_Data, Keys):
     row_keys = [key for key in ("User", "dest") if key in Keys]
     if row_keys:
