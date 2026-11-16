@@ -1,6 +1,6 @@
 """Filtrering og sortering af logvisningen."""
 
-import table
+from . import tables
 
 DEFAULT_SORT_COLUMN = "timestamp"
 
@@ -69,8 +69,8 @@ def build_view(records, event=None, user=None, level=None, dest_host=None,
     ordered = sort_records(filtered, column, descending)
 
     if ordered:
-        figure = table.build_table(ordered)
+        figure = tables.build_table(ordered)
     else:
-        figure = table.build_empty_table()
+        figure = tables.build_empty_table()
 
     return figure, len(ordered)
